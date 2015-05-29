@@ -3,6 +3,9 @@
 
 {% if monit_monitor.type == 'process' %}
 check process {{ monit_monitor.name }} with pidfile {{ monit_monitor.target }}
+{% if monit_monitor.group is defined %}
+  group "{{ monit_monitor.group }}"
+{% endif %}
 {% if monit_monitor.start is defined %}
   start program = "{{ monit_monitor.start }}"
 {% endif %}
