@@ -6,7 +6,7 @@ Ansible role for configuring Monit. Sample usage see [example.yml](http://github
 Requirements
 ------------
 
-An ansible ready host.
+An Ansible ready host.
 
 Role Variables
 --------------
@@ -19,23 +19,27 @@ Role Variables
 * `monit_eventqueue_slots`: Event queue slots. It is only used when `monit_eventqueue_dir` is defined. Defaults to `100`.
 * `monit_services`: List of hashes of services to be monitorized by monit.
   * `name`: Name of the process or host.
-  * `type`: Type of monitorization, "process", "host" and "system" are supported.
+  * `type`: Type of monitorization, "process", "host", "filesystem" and "system" are supported.
   * `target`: Target of monitorization. Should be a pidfile, an address or undefined, depending on the `type` of service.
   * `start`: Command that starts the service. Optional.
   * `stop`: Command that stop the service. Optional.
+  * `user`: Linux username of the user starting the program. Optional.
+  * `group`: Linux group of the user starting the program. Optional.
   * `rules`: List of rules to be included in this service. Optional.
 * `monit_service_detele_unlisted`: Remove existing service monitorization configurations not declared in the `services`. Defaults to `true`.
 * `monit_mail_enabled`: Enable mail alerts. Defaults to `false`.
 * `monit_mailserver_host`: Mailserver host address. Defaults to `localhost`.
-* `monit_mailserver_host`: Mailserver host port. Defaults to `25`.
+* `monit_mailserver_port`: Mailserver host port. Defaults to `25`.
 * `monit_mailserver_user`: Username for authentication on mailserver.
 * `monit_mailserver_password`: Password for authentication on mailserver.
 * `monit_mailserver_timeout`: Timeout for mailserver connection. Defaults to `5`.
 * `monit_mailserver_ssl_version`: If defined, monit will use this algorithm for SSL connection to the mail server. Possible values are `SSLAUTO`, `SSLV2`, `SSLV3`, `TLSV1`, `TLSV11`, `TLSV12`.
 * `monit_alert_address`: Mail address where the alerts will be sent to.
-* `monit_alert_mail_from`: Sender mail address.
-* `monit_alert_mail_subject`: Mail subject.
-* `monit_alert_mail_message`: Mail message body.
+* `monit_alert_mail_format`: A hash of options for mail-format.
+  * `from`: Sender mail address.
+  * `reply-to`: A reply-to mail address.
+  * `subject`: Mail subject.
+  * `message`: Mail message body.
 * `monit_webinterface_enabled`: Enable monit web interface. Defaults to `true`.
 * `monit_webinterface_bind`: IP address to bind web interface. Defaults to `0.0.0.0` (listen for external requests).
 * `monit_webinterface_port`: Port for web interface. Defaults to `2812`.
@@ -58,11 +62,14 @@ MIT
 
 CONTRIBUTE
 ----------
-	
+
 Feel free to contribute by add issue and pull request.
 
 CONTRIBUTORS
 ------------
+* [Anthony Dmitriyev](https://github.com/antstorm)
+* [Eduardo de Vera Toquero](https://github.com/etux)
 * [Manuel Tiago Pereira](http://mtpereira.github.io/)
 * [Panagiotis Moustafellos](https://github.com/pmoust)
 * [Peter Golm](https://github.com/pgolm)
+* [Svend Vanderveken](https://github.com/svendx4f)
